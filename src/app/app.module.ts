@@ -10,7 +10,19 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { SettingsComponent } from './settings/settings.component';
-
+import { HomeComponent } from './home/home.component';
+import { AgGridModule } from 'ag-grid-angular';
+import{MatToolbarModule} from '@angular/material/toolbar';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatIconModule} from '@angular/material/icon';
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin
+]);
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,11 +32,18 @@ import { SettingsComponent } from './settings/settings.component';
     CalendarComponent,
     NotificationsComponent,
     TasksComponent,
-    SettingsComponent
+    SettingsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AgGridModule,
+    MatToolbarModule,
+    FullCalendarModule,
+    DragDropModule,
+    NgbModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
