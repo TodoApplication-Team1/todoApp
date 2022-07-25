@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginService } from './service/userLogin.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
 FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatFormFieldModule,
   ],
   providers: [UserLoginService],
   bootstrap: [AppComponent],
