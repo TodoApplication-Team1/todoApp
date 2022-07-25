@@ -12,17 +12,17 @@ import { TasksComponent } from './tasks/tasks.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HomeComponent } from './home/home.component';
 import { AgGridModule } from 'ag-grid-angular';
-import{MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatIconModule} from '@angular/material/icon';
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  interactionPlugin
-]);
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserLoginService } from './service/userLogin.service';
+import { HttpClientModule } from '@angular/common/http';
+FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +33,7 @@ FullCalendarModule.registerPlugins([
     NotificationsComponent,
     TasksComponent,
     SettingsComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +43,12 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     DragDropModule,
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserLoginService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
