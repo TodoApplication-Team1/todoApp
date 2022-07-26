@@ -19,7 +19,8 @@ export class SignInComponent implements OnInit {
   getData: any;
   user: any;
   value: any = { id: 0, userName: '', email: '', password: '' };
-  error = null;
+  error: any;
+  status = 0;
   constructor(
     private userLoginService: UserLoginService,
     private socialAuthService: SocialAuthService,
@@ -47,6 +48,9 @@ export class SignInComponent implements OnInit {
       this.value = res;
       if (this.value.email == this.user.email) {
         this.router.navigate(['home']);
+      } else {
+        this.status = 1;
+        this.error = 'Check email and password is correct or not';
       }
       console.log(this.value);
 
