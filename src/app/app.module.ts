@@ -23,6 +23,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginService } from './service/userLogin.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginComponent } from './login/login.component';
+import {
+  FacebookLoginProvider,
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
+import { SignInComponent } from './sign-in/sign-in.component';
+
 FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
 @NgModule({
   declarations: [
@@ -35,6 +43,8 @@ FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
     TasksComponent,
     SettingsComponent,
     HomeComponent,
+    LoginComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,8 +59,23 @@ FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
     FormsModule,
     HttpClientModule,
     MatFormFieldModule,
+    SocialLoginModule,
   ],
-  providers: [UserLoginService],
+  providers: [
+    UserLoginService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('441438537571918'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

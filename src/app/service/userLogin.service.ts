@@ -20,7 +20,8 @@ export class UserLoginService {
 
   public checkLoginDetails(userLoginDetails: userLogin) {
     // const url = `http://localhost:8092/todo/login/signin?userName=userLoginDetails.userName&password=userLoginDetails.password`;
-    const url = `http://localhost:8092/todo/login/signin?userName=${userLoginDetails.userName}&password=${userLoginDetails.password}`;
+    // const url = `http://localhost:8092/todo/login/signin?userName=${userLoginDetails.userName}&password=${userLoginDetails.password}`;
+    const url = `http://localhost:8092/todo/login/signin?email=${userLoginDetails.email}&password=${userLoginDetails.password}`;
     console.log('url', url);
 
     return this.http.get(url);
