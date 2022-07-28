@@ -1,1 +1,91 @@
-<p>settings works!</p>
+<ng-template #content let-modal>
+  <div class="modal-header" style="align-items: center">
+    <h3 class="modal-title">New Category</h3>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+  </div>
+  <!-- <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Category</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </form> -->
+  <form [formGroup]="categoryForm" (ngSubmit)="onAddCategory()">
+    <input
+      type="text"
+      placeholder="Write Here"
+      class="form-control mx-sm-0.5"
+      formControlName="category"
+      id="category"
+    />
+    <div class="modal-footer">
+      <button
+        style="text-align: right"
+        type="submit"
+        class="btn btn-primary"
+        (click)="modal.close('Close click')"
+      >
+        + &nbsp; ADD
+      </button>
+    </div>
+  </form>
+</ng-template>
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+  <div class="container h-65">
+    <div class="row d-flex justify-content-center align-items-center h-80">
+      <div
+        class="col-8 col-md-9 col-lg-4 col-xl-6"
+        style="margin-bottom: 40rem"
+      >
+        <div class="card" style="border-radius: 15px">
+          <div class="card-body p-5">
+            <h2 class="text-left mb-3">Settings</h2>
+            <label>Theme</label>
+            <!-- <div class="btn-group" style="float: right;">
+                        <select   class="btn btn-primary dropdown-toggle" id="dropdowmMenu" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                          Select Theme
+            <div class="dropdown-menu" aria-labelledby="dropdowmMenu">
+                          <option class="dropdown-item" selected>Light</option>
+                          <option class="dropdown-item" >Dark</option>
+                        </div>
+                        </select>
+                        
+                      </div> -->
+            <div class="btn-group" style="float: right; margin-right: 6.2rem">
+              <select
+                class="custom-select mr-sm-3"
+                id="inlineFormCustomSelectPref"
+              >
+                <option selected>Select Theme</option>
+                <option value="1">Light</option>
+                <option value="2">Dark</option>
+                <!-- <option value="3">Three</option> -->
+              </select>
+            </div>
+            <br />
+            <br />
+            <h3 class="text-left mb-3">Categories</h3>
+
+            <button
+              type="submit"
+              *ngFor="let ctgry of arr"
+              class="btn btn-sm btn-primary text-white pull-left px-2 py-0.5 mr-4 text-wrap"
+              style="font-size: 15px; border-radius: 12px"
+              (click)="onClick(ctgry)"
+            >
+              {{ ctgry }}
+              <b>-</b>
+            </button>
+            <button
+              type="submit"
+              class="btn btn-sm btn-primary text-white pull-left px-2 py-0.5 text-wrap"
+              (click)="openVerticallyCentered(content)"
+              style="font-size: 15px; border-radius: 12px"
+            >
+              <b>+</b>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container h-65">
+  <div class="row d-flex justify-content-center align-items-center h-80">
+    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+      <div class="card" style="border-radius: 15px">
+        <div class="card-body p-5">
+          <h2 class="text-uppercase text-center mb-3">Sign In to TODO</h2>
+
+          <form [formGroup]="signInForm" (ngSubmit)="userExist()">
+            <div class="form-outline mb-2">
+              <input
+                type="text"
+                formControlName="emails"
+                id="emails"
+                class="form-control form-control-lg"
+                required
+              />
+              <label class="form-label" for="form3Example1cg">Your Email</label>
+              <!-- <div
+                  class="alert alert-danger"
+                  *ngIf="!fullname.valid && fullname.touched"
+                >
+                  Enter Your Name
+                </div> -->
+            </div>
+
+            <div class="form-outline mb-2">
+              <input
+                type="password"
+                formControlName="passwords"
+                id="passwords"
+                class="form-control form-control-lg"
+                required
+                minlength="8"
+              />
+              <label class="form-label" for="form3Example4cg">Password</label>
+              <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+
+              <!-- <div *ngIf="password?.errors?.['pattern']"> 
+                Must contain at least one number and one uppercase and lowercase letter,
+                and at least 8 or more characters.
+              </div> -->
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+          <span
+            [ngClass]="status == 1 ? 'text-danger' : 'text-success'"
+            style="margin-left: 150px"
+            >{{ error }}</span
+          >
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+          </div>
+
+          <div
+            class="g-signin2"
+            style="float: left"
+            data-onsuccess="onSignIn"
+            data-longtitle="true"
+          ></div>
+          <button
+            class="btn btn-primary"
+            style="float: right"
+            (click)="facebookSignin()"
+            routerLink="home"
+          >
+            Continue with Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
