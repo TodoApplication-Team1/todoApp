@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../model/task.model';
 import { Category } from '../model/category.model';
+import { Profile } from '../model/profile.model';
 
 @Injectable()
 export class UserLoginService {
@@ -53,5 +54,12 @@ export class UserLoginService {
   public deleteCategory(category: String) {
     const url = `http://localhost:8092/todo/login/Category?ctgry=${category}`;
     return this.http.delete(url);
+  }
+
+  public updateProfile(profileDetails: Profile): Observable<Profile> {
+    const url = `http://localhost:8092/todo/login/profile`;
+    console.log('url', url);
+
+    return this.http.post<Profile>(url, profileDetails);
   }
 }

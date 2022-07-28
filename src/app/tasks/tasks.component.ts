@@ -10,6 +10,8 @@ export class TasksComponent implements OnInit {
   public taskForm: FormGroup;
   taskModel: any;
   arr: any = [];
+  message = '';
+  status = 0;
   constructor(
     private formBuilder: FormBuilder,
     private userLoginService: UserLoginService
@@ -42,13 +44,15 @@ export class TasksComponent implements OnInit {
   onAddTaskDetails(): void {
     console.log(this.taskForm);
     this.taskModel = {
-      category: this.taskForm.controls['category'].value,
+      categoryName: this.taskForm.controls['category'].value,
       taskName: this.taskForm.controls['task'].value,
       time: this.taskForm.controls['time1'].value,
       date: this.taskForm.controls['date1'].value,
     };
     this.userLoginService.addTaskDetails(this.taskModel).subscribe((data) => {
       this.taskModel = data;
+      this.status = 1;
+      this.message = 'Task Added';
       console.log(data);
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import {
   SocialAuthService,
   FacebookLoginProvider,
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { UserLoginService } from '../service/userLogin.service';
 import { userLogin } from '../model/userLogin.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Meta } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -25,14 +27,31 @@ export class SignInComponent implements OnInit {
     private userLoginService: UserLoginService,
     private socialAuthService: SocialAuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private metaService: Meta,
+    @Inject(DOCUMENT)
+    private doc: Document,
+    private renderer: Renderer2
   ) {
     this.signInForm = this.formBuilder.group({
       emails: ['', [Validators.required]],
       passwords: ['', [Validators.required]],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.metaService.addTags([
+      {
+        name: 'google-signin-client_id',
+        content:
+          '15922768334-rse4413kf08qv6gustdusfoj2s2fomos.apps.googleusercontent.com',
+      },
+    ]);
+    let script = this.renderer.createElement('script');
+    script.src = 'https://apis.google.com/js/platform.js';
+    script.defer = true;
+    script.async = true;
+    this.renderer.appendChild(document.body, script);
+  }
   get addSignInFormControls() {
     return this.signInForm.controls;
   }

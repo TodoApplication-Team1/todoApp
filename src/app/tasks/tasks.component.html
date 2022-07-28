@@ -17,7 +17,7 @@
                     formControlName="category"
                   >
                     <option selected>Select Category</option>
-                    <option *ngFor="let c of arr" value="{{ c.toLowerCase() }}">
+                    <option *ngFor="let c of arr" value="{{ c }}">
                       {{ c }}
                     </option>
                     <!-- <option value="2">Two</option>
@@ -119,6 +119,17 @@
                 <b>+</b> ADD
               </button>
             </div>
+            <span
+              [ngClass]="status == 1 ? 'text-success' : 'text-danger'"
+              style="
+                text-align: center;
+                margin: bottom 20px;
+                font-size: 25px;
+                font-weight: bold;
+              "
+            >
+              {{ message }}</span
+            >
           </div>
         </div>
       </div>

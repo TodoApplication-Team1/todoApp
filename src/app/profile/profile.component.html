@@ -1,4 +1,4 @@
-
+<form [formGroup]="ProfileForm" id="ProfileForm" (ngSubmit)="onAddProfile()">
   <div class="row">
     <div class="card-deck col-lg-9">
       <div class="card mb-7 l-5">
@@ -33,7 +33,9 @@
             <div class="row">
               <div class="col-sm-3"><p class="mb-0">Email</p></div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">example@example.com</p>
+                <mat-form-field class="example-full-width">
+                  <input formControlName="emails" id="emails" matInput />
+                </mat-form-field>
               </div>
             </div>
             <hr />
@@ -41,7 +43,13 @@
               <div class="col-sm-3"><p class="mb-0">Phone</p></div>
               <div class="col-sm-9">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Phone" value="9568957684">
+                  <input
+                    formControlName="phone"
+                    id="phone"
+                    matInput
+                    placeholder="Phone"
+                    value="9568957684"
+                  />
                 </mat-form-field>
               </div>
             </div>
@@ -49,9 +57,14 @@
             <div class="row">
               <div class="col-sm-3"><p class="mb-0">Mobile</p></div>
               <div class="col-sm-9">
-              
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Mobile" value="8945781259">
+                  <input
+                    formControlName="mobile"
+                    id="mobile"
+                    matInput
+                    placeholder="Mobile"
+                    value="8945781259"
+                  />
                 </mat-form-field>
               </div>
             </div>
@@ -59,20 +72,26 @@
             <div class="row">
               <div class="col-sm-3"><p class="mb-0">Address</p></div>
               <div class="col-sm-9">
-      
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Address" value="kanpur, up, India">
+                  <input
+                    formControlName="address"
+                    id="address"
+                    matInput
+                    placeholder="Address"
+                    value="kanpur, up, India"
+                  />
                 </mat-form-field>
               </div>
             </div>
 
             <div class="d-flex justify-content-center mb-2 mt-4">
-            <button type="button" class="btn btn-outline-primary ms-1">
-              Save
-            </button>
-          </div>
+              <button type="submit" class="btn btn-outline-primary ms-1">
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</form>

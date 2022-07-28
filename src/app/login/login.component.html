@@ -1,9 +1,14 @@
+<!-- <meta
+  name="google-signin-client_id"
+  content="15922768334-rse4413kf08qv6gustdusfoj2s2fomos.apps.googleusercontent.com"
+/>
+<script src="https://apis.google.com/js/platform.js"></script> -->
 <div class="container h-65">
   <div class="row d-flex justify-content-center align-items-center h-80">
     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
       <div class="card" style="border-radius: 15px">
         <div class="card-body p-5">
-          <h2 class="text-uppercase text-center mb-3">Sign In to TODO</h2>
+          <h2 class="text-uppercase text-center mb-3">Sign Up to TODO</h2>
 
           <form #f="ngForm" (ngSubmit)="addUser(f.value)">
             <div class="form-outline mb-2">
@@ -128,9 +133,25 @@
             data-onsuccess="onSignIn"
             data-longtitle="true"
           >
-            <div routerLink="home"></div>
+            <!-- <div routerLink="home"></div> -->
           </div>
-
+          <!-- <a href="#" <a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>;">Sign out</a>
+          <script>
+            function signOut() {
+              var auth2 = gapi.auth2.getAuthInstance();
+              auth2.signOut().then(function () {
+                console.log("User signed out.");
+              });
+            }
+          </script> -->
           <button
             class="btn btn-primary"
             style="float: right"
