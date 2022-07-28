@@ -5,7 +5,7 @@
 <div class="todo-list">
     <h3 style="font-size:20px; font-style:normal">Today</h3>
     <ag-grid-angular 
-    style="width: 402px; height: 200px; margin: 5px;" 
+    style="width: 610px; height: 130px; margin: 5px;" 
     class="ag-theme-balham"
     [rowData]="rowData" 
     [columnDefs]="columnDefs"
@@ -17,16 +17,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="example-container">
-                    <h2 class="head-title">To do <span *ngIf="tasks.length>0">- {{tasks.length}}</span></h2>
+                    <h2 class="head-title">To do </h2>
                    
                     <div
                       cdkDropList
                       [cdkDropListData]="tasks"
                       class="example-list"
                       (cdkDropListDropped)="drop($event)">
-                      <div class="example-box" *ngFor="let item of tasks;let i=index" cdkDrag>{{item}}
+                      <div class="example-box" *ngFor="let item of tasks" cdkDrag>{{item}}
                         <div class="box">
-                            <button mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon>delete</mat-icon></button>
+                             <!-- <button mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon>delete</mat-icon></button>  -->
                         </div>
                       </div>
                     </div>
