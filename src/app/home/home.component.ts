@@ -38,6 +38,16 @@ export class HomeComponent implements OnInit {
     // {headerName: 'Date', field: 'date'}
   ];
 
+  // rowData = [
+  //   { task: 'Go to shop', time: '11:00 am' },
+  //   { task: 'check the washing machine', time: '1:00 pm' },
+  //   { task: 'Water plant',  time: '5:30 pm' },
+  //   { task: 'Wash the car',  time: '3:00 pm' },
+  //   { task: 'dinner',  time: '8:00 pm' },
+  // ];
+
+  //tasks=['Go to shop','check the washing machine','Water plant','Wash the car','dinner'];
+
   ngOnInit(): void {
     this.todoservice.getTodayList().subscribe((data) => {
       console.log(data);
