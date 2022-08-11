@@ -9,7 +9,7 @@ import { Profile } from '../model/profile.model';
 @Injectable()
 export class UserLoginService {
   constructor(private http: HttpClient) {}
-  id: any = localStorage.getItem['token'];
+  id: any = localStorage.getItem('token');
 
   getdata: any = {
     id: localStorage.getItem('token'),
