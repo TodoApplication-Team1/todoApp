@@ -1,7 +1,7 @@
 <form [formGroup]="ProfileForm" id="ProfileForm" (ngSubmit)="onAddProfile()">
   <div class="row">
-    <div class="card-deck col-lg-9">
-      <div class="card mb-7 l-5">
+    <div class="card-deck col-lg-6 center" style="margin-left: 300px">
+      <div class="card mb-4">
         <div class="card-body text-center">
           <img
             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
@@ -9,10 +9,35 @@
             class="rounded-circle img-fluid"
             style="width: 150px"
           />
+          <!-- <div class="row">
+            <div
+              class="col-12 box ml-3 d-flex justify-content-center align-items-center rounded-circle img-fluid"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                class="fa-4x icon2"
+              >
+                create
+              </mat-icon>
+
+              <img [src]="profileURL" class="rounded-circle img-fluid" alt="" />
+
+              <label *ngIf="removePencil">
+                <input
+                  type="file"
+                  #profileImage
+                  (change)="selectProfilePic($event)"
+                  class="profileInput"
+                  accept="image/gif,image/jpeg,image/jpg,image/png"
+                  multiple=""
+                />
+              </label>
+            </div>
+          </div> -->
           <h5 class="my-3" formControlName="userName" id="userName">
             {{ profiles.userName }}
           </h5>
-
           <div class="d-flex justify-content-center mb-2">
             <button type="button" class="btn btn-primary" (click)="logout()">
               Logout</button
@@ -24,94 +49,93 @@
               Edit
             </button>
           </div>
-        </div>
+          <!-- </div>
       </div>
       <div class="card-deck col-lg-7" style="float: right">
         <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3"><p class="mb-0">Full Name</p></div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ profiles.userName }}</p>
-              </div>
+          <div class="card-body"> -->
+          <div class="row" style="padding-left: 15px; padding-top: 50px">
+            <div class="col-sm-3"><p class="mb-0">Full Name</p></div>
+            <div class="col-sm-8">
+              <p class="text-muted mb-0">{{ profiles.userName }}</p>
             </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3"><p class="mb-0">Email</p></div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ profiles.email }}</p>
-                <!-- <mat-form-field class="example-full-width">
+          </div>
+          <hr />
+          <div class="row" style="padding-top: 10px">
+            <div class="col-sm-3"><p class="mb-0">Email</p></div>
+            <div class="col-sm-8" style="padding-left: 5px">
+              <p class="text-muted mb-0">{{ profiles.email }}</p>
+              <!-- <mat-form-field class="example-full-width">
                   <input formControlName="emails" id="emails" matInput />
                 </mat-form-field> -->
-              </div>
             </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3"><p class="mb-0">Phone</p></div>
-              <div class="col-sm-9">
-                <mat-form-field class="example-full-width">
-                  <input
-                    formControlName="phone"
-                    [attr.disabled]="is_edit == 'false' ? true : null"
-                    id="phone"
-                    matInput
-                    placeholder="{{ profiles.phone }}"
-                    value="9568957684"
-                  />
-                </mat-form-field>
-              </div>
+          </div>
+          <hr />
+          <div class="row" style="padding-top: 10px">
+            <div class="col-sm-3"><p class="mb-0">Phone</p></div>
+            <div class="col-sm-9">
+              <mat-form-field class="example-full-width">
+                <input
+                  formControlName="phone"
+                  [attr.disabled]="is_edit == 'false' ? true : null"
+                  id="phone"
+                  matInput
+                  placeholder="{{ profiles.phone }}"
+                  value="{{ profiles.phone }}"
+                />
+              </mat-form-field>
             </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3"><p class="mb-0">Mobile</p></div>
-              <div class="col-sm-9">
-                <mat-form-field class="example-full-width">
-                  <input
-                    formControlName="mobile"
-                    [attr.disabled]="is_edit == 'false' ? true : null"
-                    id="mobile"
-                    matInput
-                    placeholder="{{ profiles.mobile }}"
-                  />
-                </mat-form-field>
-              </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3"><p class="mb-0">Mobile</p></div>
+            <div class="col-sm-9">
+              <mat-form-field class="example-full-width">
+                <input
+                  formControlName="mobile"
+                  [attr.disabled]="is_edit == 'false' ? true : null"
+                  id="mobile"
+                  matInput
+                  placeholder="{{ profiles.mobile }}"
+                />
+              </mat-form-field>
             </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3"><p class="mb-0">Address</p></div>
-              <div class="col-sm-9">
-                <mat-form-field class="example-full-width">
-                  <input
-                    formControlName="address"
-                    [attr.disabled]="is_edit == 'false' ? true : null"
-                    id="address"
-                    matInput
-                    placeholder="{{ profiles.address }}"
-                  />
-                </mat-form-field>
-              </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3"><p class="mb-0">Address</p></div>
+            <div class="col-sm-9">
+              <mat-form-field class="example-full-width">
+                <input
+                  formControlName="address"
+                  [attr.disabled]="is_edit == 'false' ? true : null"
+                  id="address"
+                  matInput
+                  placeholder="{{ profiles.address }}"
+                />
+              </mat-form-field>
             </div>
+          </div>
 
-            <div class="d-flex justify-content-center mb-2 mt-4">
-              <button
-                type="submit"
-                class="btn btn-outline-primary ms-1"
-                [attr.disabled]="is_edit == 'false' ? true : null"
-              >
-                Save
-              </button>
-              <span
-                [ngClass]="status == 1 ? 'text-success' : 'text-danger'"
-                style="
-                  text-align: center;
-                  margin: bottom 20px;
-                  font-size: 15px;
-                  font-weight: bold;
-                "
-              >
-                {{ message }}</span
-              >
-            </div>
+          <div class="d-flex justify-content-center mb-2 mt-4">
+            <button
+              type="submit"
+              class="btn btn-outline-primary ms-1"
+              [attr.disabled]="is_edit == 'false' ? true : null"
+            >
+              Save
+            </button>
+            <span
+              [ngClass]="status == 1 ? 'text-success' : 'text-danger'"
+              style="
+                text-align: center;
+                margin: bottom 20px;
+                font-size: 15px;
+                font-weight: bold;
+              "
+            >
+              {{ message }}</span
+            >
           </div>
         </div>
       </div>

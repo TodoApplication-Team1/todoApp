@@ -9,9 +9,10 @@ import { Profile } from '../model/profile.model';
 @Injectable()
 export class UserLoginService {
   constructor(private http: HttpClient) {}
-  id: any;
+  id: any = localStorage.getItem['token'];
+
   getdata: any = {
-    id: 1,
+    id: localStorage.getItem('token'),
     userName: '',
     password: '',
     email: '',
@@ -83,8 +84,12 @@ export class UserLoginService {
     return this.http.get(url);
   }
 
-  public addTaskDetails(userTaskDetails: Task): Observable<Task> {
-    const url = `http://localhost:8092/todo/login/task`;
+  public addTaskDetails(
+    userTaskDetails: Task,
+    categoryid: any
+  ): Observable<Task> {
+    this.id = this.getdata.id;
+    const url = `http://localhost:8092/todo/login/task?userId=${this.id}&categoryId=${categoryid}`;
     console.log('url', url);
 
     return this.http.post<Task>(url, userTaskDetails);
@@ -101,16 +106,38 @@ export class UserLoginService {
   }
 
   public getCategories() {
-    this.id = this.getdata.id;
+    console.log(localStorage.getItem('token'));
+    this.id = localStorage.getItem('token');
     const url = `http://localhost:8092/todo/login/getCategory?id=${this.id}`;
     console.log('url', url);
 
     return this.http.get(url);
   }
 
-  public deleteCategory(category: String) {
+  public getCategoryID(ctgry: any) {
+    this.id = localStorage.getItem('token');
+
+    const url = `http://localhost:8092/todo/login/CategoryId?id=${this.id}&ctgry=${ctgry}`;
+    console.log('url', url);
+
+    return this.http.get(url);
+  }
+  categoryId: any;
+  public getCategoryIDs(userTaskDetails: Task, ctgry: any) {
+    this.id = localStorage.getItem('token');
+
+    const url = `http://localhost:8092/todo/login/CategoryId?id=${this.id}&ctgry=${ctgry}`;
+    console.log('url', url);
+
+    this.http.get(url).subscribe((res) => {
+      this.categoryId = res;
+    });
+    return this.addTaskDetails(userTaskDetails, this.categoryId);
+  }
+
+  public deleteCategory(categoryId: any) {
     this.id = this.getdata.id;
-    const url = `http://localhost:8092/todo/login/Category?id=${this.id}&ctgry=${category}`;
+    const url = `http://localhost:8092/todo/login/Category?categoryId=${categoryId}`;
     return this.http.delete(url);
   }
 
@@ -133,6 +160,22 @@ export class UserLoginService {
     this.id = this.getdata.id;
     const url = `http://localhost:8092/todo/login/editprofile?userId=${this.id}`;
     console.log('url', url);
-    return this.http.post<Profile>(url, profileDetails);
+    return this.http.put<Profile>(url, profileDetails);
+  }
+
+  getTodayTaskName(): Observable<String[]> {
+    this.id = this.getdata.id;
+    const url2 = `http://localhost:8092/todo/login/getTodayTaskName?userId=${this.id}`;
+    return this.http.get<String[]>(`${url2}`);
+  }
+
+  getTodayList(): Observable<Task[]> {
+    this.id = this.getdata.id;
+    const url2 = `http://localhost:8092/todo/login/getTodayList?userId=${this.id}`;
+    return this.http.get<Task[]>(`${url2}`);
+  }
+
+  IsLoggedIn() {
+    return localStorage.getItem('token') != '';
   }
 }

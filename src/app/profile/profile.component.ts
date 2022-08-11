@@ -57,8 +57,9 @@ export class ProfileComponent implements OnInit {
       mobile: this.ProfileForm.controls['mobile'].value,
       address: this.ProfileForm.controls['address'].value,
     };
-    this.userLoginService.updateProfile(this.profileModel).subscribe((data) => {
+    this.userLoginService.editProfile(this.profileModel).subscribe((data) => {
       console.log(data);
+      this.profiles = data;
       this.status = 1;
       this.message = 'Profile has been updated';
     });
@@ -74,6 +75,36 @@ export class ProfileComponent implements OnInit {
     this.message = '';
   }
   logout() {
-    this.route.navigateByUrl('login');
+    localStorage.setItem('token', '');
+    this.route.navigate(['login']);
+  }
+
+  fileName = '';
+  profileURL = null;
+  removePencil: boolean = true;
+  uploadProfile(file: any) {
+    // this.uploadService.pushFileToStorage(file).subscribe(
+    //   (res: any) => {
+    //     if (res instanceof HttpResponse) {
+    //       console.log("Uploaded PRofile:", res.body);
+    //       this.profileURL = res.body.fileDownloadUri;
+    //       this.removePencil = false;
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log("error");
+    //   }
+    // );
+  }
+  selectProfilePic(event: any) {
+    console.log(event);
+    if (event.target.files) {
+      this.fileName = event.target.files[0].name;
+      let profileFile = event.target.files[0];
+
+      this.uploadProfile(profileFile);
+
+      event.target.value = null;
+    }
   }
 }

@@ -10,6 +10,7 @@ import { parseClassNames } from '@fullcalendar/angular';
 import { IGetRowsParams } from 'ag-grid-community';
 import { Subscription } from 'rxjs';
 import { TodolistService } from '../service/todolist.service';
+import { UserLoginService } from '../service/userLogin.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private todoservice: TodolistService,
-    private http: HttpClient
+    private http: HttpClient,
+    private userLoginService: UserLoginService
   ) {}
 
   columnDefs = [
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
   //tasks=['Go to shop','check the washing machine','Water plant','Wash the car','dinner'];
 
   ngOnInit(): void {
-    this.todoservice.getTodayList().subscribe((data) => {
+    this.userLoginService.getTodayList().subscribe((data) => {
       console.log(data);
       console.log('printed');
       var dataArray = Object.values(data);
@@ -57,7 +59,7 @@ export class HomeComponent implements OnInit {
       console.log(this.rowData);
     });
 
-    this.todoservice.getTodayTaskName().subscribe((data) => {
+    this.userLoginService.getTodayTaskName().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         this.tasks.push(data[i]);
       }

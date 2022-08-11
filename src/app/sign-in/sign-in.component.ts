@@ -65,6 +65,7 @@ export class SignInComponent implements OnInit {
     this.userLoginService.checkLoginDetails(this.user).subscribe((res) => {
       // if (res === "OK") {
       this.value = res;
+      localStorage.setItem('token', this.value.id);
       if (this.value.email == this.user.email) {
         this.router.navigate(['home']);
       } else {

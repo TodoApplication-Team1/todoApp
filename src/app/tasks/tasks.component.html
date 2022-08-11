@@ -15,6 +15,7 @@
                     class="btn-group"
                     id="category"
                     formControlName="category"
+                    required
                   >
                     <option selected>Select Category</option>
                     <option *ngFor="let c of arr" value="{{ c }}">
@@ -37,7 +38,9 @@
                     class="form-control mx-sm-5"
                     aria-describedby="tasks"
                     placeholder="Write Task"
+                    required
                   />
+                  <!-- <div class="alert alert-danger">Select the category</div> -->
                 </div>
               </div>
               <br />
@@ -54,6 +57,7 @@
                     formControlName="time1"
                     class="form-control mx-sm-5"
                     name="time"
+                    required
                   /><br /><br />
                 </div>
 
@@ -81,6 +85,7 @@
                         formControlName="date1"
                         type="date"
                         class="form-control mx-sm-5"
+                        required
                       />
                       <!-- <input
                                 class="form-control"

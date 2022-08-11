@@ -2,13 +2,7 @@
 
 <app-sidenav
   (onToggleSideNav)="onToggleSideNav($event)"
-  *ngIf="
-    !(
-      router.url == '/login' ||
-      router.url == '/sign-in' ||
-      router.url == '/success'
-    )
-  "
+  *ngIf="!(router.url == '/login' || router.url == '/sign-in')"
 >
 </app-sidenav>
 <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth">

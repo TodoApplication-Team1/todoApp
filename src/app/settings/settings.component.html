@@ -29,6 +29,38 @@
     </div>
   </form>
 </ng-template>
+<ng-template #content1 let-modal>
+  <div class="modal-header" style="align-items: center">
+    <h3 class="modal-title">If you want to delete the category</h3>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+  </div>
+  <!-- <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Category</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </form> -->
+
+  <div class="modal-footer">
+    <button
+      style="text-align: right"
+      type="submit"
+      class="btn btn-primary"
+      (click)="onClick()"
+      (click)="modal.close('Close click')"
+    >
+      Yes
+    </button>
+    <button
+      style="text-align: right"
+      type="submit"
+      class="btn btn-primary"
+      (click)="modal.close('Close click')"
+    >
+      No
+    </button>
+  </div>
+</ng-template>
 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
   <div class="container h-65">
     <div class="row d-flex justify-content-center align-items-center h-80">
@@ -70,7 +102,7 @@
               *ngFor="let ctgry of arr"
               class="btn btn-sm btn-primary text-white pull-left px-2 py-0.5 mr-4 text-wrap"
               style="font-size: 15px; border-radius: 12px"
-              (click)="onClick(ctgry)"
+              (click)="openVerticallyCentered1(content1, ctgry)"
             >
               {{ ctgry }}
               <b>-</b>

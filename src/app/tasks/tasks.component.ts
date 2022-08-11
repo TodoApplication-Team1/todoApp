@@ -1,5 +1,13 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { UserLoginService } from '../service/userLogin.service';
 @Component({
   selector: 'app-tasks',
@@ -14,16 +22,23 @@ export class TasksComponent implements OnInit {
   status = 0;
   constructor(
     private formBuilder: FormBuilder,
-    private userLoginService: UserLoginService
+    private userLoginService: UserLoginService,
+    private http: HttpClient
   ) {
     this.taskForm = this.formBuilder.group({
-      category: ['', [Validators.required]],
+      category: new FormControl('', [Validators.required]),
       task: ['', [Validators.required]],
       time1: ['', [Validators.required]],
       date1: ['', [Validators.required]],
     });
   }
-
+  categoryId: any;
+  onSelect(c: any) {
+    this.userLoginService.getCategoryID(c).subscribe((res) => {
+      this.categoryId = res;
+      console.log(res);
+    });
+  }
   ngOnInit(): void {
     this.userLoginService.getCategories().subscribe((res: any) => {
       console.log(res);
@@ -40,8 +55,17 @@ export class TasksComponent implements OnInit {
     return this.taskForm.controls;
   }
   model: any;
+  id: any;
+  public getCategoryID(ctgry: any) {
+    this.id = localStorage.getItem('token');
 
-  onAddTaskDetails(): void {
+    const url = `http://localhost:8092/todo/login/CategoryId?id=${this.id}&ctgry=${ctgry}`;
+    console.log('url', url);
+
+    return this.http.get(url).toPromise();
+  }
+  tasks: any;
+  async onAddTaskDetails() {
     console.log(this.taskForm);
     this.taskModel = {
       categoryName: this.taskForm.controls['category'].value,
@@ -49,11 +73,29 @@ export class TasksComponent implements OnInit {
       time: this.taskForm.controls['time1'].value,
       date: this.taskForm.controls['date1'].value,
     };
-    this.userLoginService.addTaskDetails(this.taskModel).subscribe((data) => {
-      this.taskModel = data;
-      this.status = 1;
-      this.message = 'Task Added';
-      console.log(data);
-    });
+    console.log(this.taskModel);
+    const users = await this.getCategoryID(this.taskModel.categoryName);
+    console.log(users);
+    this.id = localStorage.getItem('token');
+    console.log(
+      `http://localhost:8092/todo/login/task?userId=${this.id}&categoryId=${users}`
+    );
+    this.http
+      .post<Task>(
+        `http://localhost:8092/todo/login/task?userId=${this.id}&categoryId=${users}`,
+        this.taskModel
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.status = 1;
+        this.message = 'Task Added';
+      });
+    // this.userLoginService.addTaskDetails(this.taskModel, users);
+    // .subscribe((data) => {
+    //   // this.taskModel = data;
+    //   this.status = 1;
+    //   this.message = 'Task Added';
+    //   console.log(data);
+    // });
   }
 }

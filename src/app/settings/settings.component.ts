@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { _ } from 'ag-grid-community';
 import { Category } from '../model/category.model';
 import { UserLoginService } from '../service/userLogin.service';
 @Component({
@@ -30,6 +31,16 @@ export class SettingsComponent implements OnInit {
     this.modalService.open(content, { centered: true });
     this.arr = [];
     this.ngOnInit();
+  }
+  ctgry1: any;
+  id: any;
+  openVerticallyCentered1(content1: any, ctgry: any) {
+    this.modalService.open(content1, { centered: true });
+    // this.arr = [];
+    this.userLoginService.getCategoryID(ctgry).subscribe((res) => {
+      this.id = res;
+    });
+    this.ctgry1 = ctgry;
   }
   ngOnInit(): void {
     this.userLoginService.getCategories().subscribe((res: any) => {
@@ -64,11 +75,21 @@ export class SettingsComponent implements OnInit {
       }
     );
   }
-  onClick(ctgry: any) {
-    console.log(ctgry);
-    this.userLoginService.deleteCategory(ctgry).subscribe((res: any) => {
-      this.arr = res;
+  onClick() {
+    console.log(this.ctgry1);
+
+    this.userLoginService.deleteCategory(this.id).subscribe((res: any) => {
+      this.msg = 'Category Deleted';
+      // this.arr = res;
+
       console.log('DELETED');
     });
+    this.msg = 'Category Deleted';
+    // this.arr.delete(this.ctgry1);
+    // this.ngOnInit();
+    const index = this.arr.indexOf(this.ctgry1, 0);
+    if (index > -1) {
+      this.arr.splice(index, 1);
+    }
   }
 }

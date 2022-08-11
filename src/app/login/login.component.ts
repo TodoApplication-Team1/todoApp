@@ -19,35 +19,41 @@ export class LoginComponent implements OnInit {
   message: any;
   status = 0;
   gUser: any;
+  // auth2: any;
 
+  userDetails: any;
+  // @ViewChild('loginRef', { static: true })
+  // loginElement: any = ElementRef;
   constructor(
     private socialAuthService: SocialAuthService,
     private userLoginService: UserLoginService,
     private router: Router,
+
     private metaService: Meta,
     @Inject(DOCUMENT)
     private doc: Document,
     private renderer: Renderer2,
     ngZone: NgZone
   ) {
-    // window['onSignIn'] = this.onSignIn;
-    // (user: any) =>
+    // window['onSignIn'] = (user: any) =>
     //   ngZone.run(() => {
+    //     console.log('hai');
     //     this.afterSignUp(user);
     //   });
   }
 
-  afterSignUp(googleUser: any) {
-    this.gUser = googleUser;
-    console.log(this.gUser);
-  }
-  public onSignIn(googleUser: any): void {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
-  }
+  // afterSignUp(googleUser: any) {
+  //   this.gUser = googleUser;
+  //   this.onSignIn(this.gUser);
+  //   console.log(this.gUser);
+  // }
+  // public onSignIn(googleUser: any): void {
+  //   var profile = googleUser.getBasicProfile();
+  //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  //   console.log('Name: ' + profile.getName());
+  //   console.log('Image URL: ' + profile.getImageUrl());
+  //   console.log('Email: ' + profile.getEmail());
+  // }
 
   // public signOut():void {
   //   var auth2 = gapi.auth2.getAuthInstance();
@@ -56,6 +62,7 @@ export class LoginComponent implements OnInit {
   //   });
   // }
   ngOnInit(): void {
+    // this.googleAuthSDK();
     this.metaService.addTags([
       {
         name: 'google-signin-client_id',
@@ -83,6 +90,8 @@ export class LoginComponent implements OnInit {
     console.log(this.User);
     this.userLoginService.addUserLoginDetails(this.User).subscribe(
       (data) => {
+        this.userDetails = data;
+        localStorage.setItem('token', this.userDetails.id);
         this.status = 1;
         this.message = 'Sign Up successful. Login using below link';
         console.log('POST SUCCESS');
@@ -96,4 +105,47 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  // callLoginButton() {
+  //   this.auth2.attachClickHandler(
+  //     this.loginElement.nativeElement,
+  //     {},
+  //     (googleAuthUser: any) => {
+  //       let profile = googleAuthUser.getBasicProfile();
+  //       console.log('Token || ' + googleAuthUser.getAuthResponse().id_token);
+  //       console.log('ID: ' + profile.getId());
+  //       console.log('Name: ' + profile.getName());
+  //       console.log('Image URL: ' + profile.getImageUrl());
+  //       console.log('Email: ' + profile.getEmail());
+
+  //       /* Write Your Code Here */
+  //     },
+  //     (error: any) => {
+  //       alert(JSON.stringify(error, undefined, 2));
+  //     }
+  //   );
+  // }
+  // googleAuthSDK() {
+  //   window['googleSDKLoaded'] = () => {
+  //     window['gapi'].load('auth2', () => {
+  //       this.auth2 = window['gapi'].auth2.init({
+  //         client_id: 'YOUR CLIENT ID HERE',
+  //         cookiepolicy: 'single_host_origin',
+  //         scope: 'profile email',
+  //       });
+  //       this.callLoginButton();
+  //     });
+  //   };
+  //   (function (d, s, id) {
+  //     var js,
+  //       fjs = d.getElementsByTagName(s)[0];
+  //     if (d.getElementById(id)) {
+  //       return;
+  //     }
+  //     js = d.createElement(s);
+  //     js.id = id;
+  //     console.log(js);
+  //     // js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
+  //     // fjs.parentNode.insertBefore(js, fjs);
+  //   })(document, 'script', 'google-jssdk');
+  // }
 }

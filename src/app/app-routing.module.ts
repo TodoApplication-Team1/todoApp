@@ -6,17 +6,21 @@ import { LoginComponent } from './login/login.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AuthGuard } from './shared/auth.guard';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TasksComponent } from './tasks/tasks.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'tasks', component: TasksComponent },
-  { path: 'settings', component: SettingsComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'sign-in', component: SignInComponent },
 ];

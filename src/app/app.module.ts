@@ -62,6 +62,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
     SocialLoginModule,
   ],
   providers: [
+    { provide: Window, useValue: window },
     UserLoginService,
     {
       provide: 'SocialAuthServiceConfig',
