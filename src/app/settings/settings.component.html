@@ -83,6 +83,17 @@
             >
               <b>+</b>
             </button>
+            <span
+              [ngClass]="status == 1 ? 'text-success' : 'text-danger'"
+              style="
+                text-align: center;
+                margin: bottom 20px;
+                font-size: 25px;
+                font-weight: bold;
+              "
+            >
+              {{ msg }}</span
+            >
           </div>
         </div>
       </div>

@@ -9,12 +9,18 @@
             class="rounded-circle img-fluid"
             style="width: 150px"
           />
-          <h5 class="my-3">John Smith</h5>
-          <p class="text-muted mb-1">Full Stack Developer</p>
-          <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+          <h5 class="my-3" formControlName="userName" id="userName">
+            {{ profiles.userName }}
+          </h5>
+
           <div class="d-flex justify-content-center mb-2">
-            <button type="button" class="btn btn-primary">Logout</button
-            ><button type="button" class="btn btn-outline-primary ms-1">
+            <button type="button" class="btn btn-primary" (click)="logout()">
+              Logout</button
+            ><button
+              type="button"
+              class="btn btn-outline-primary ms-1"
+              (click)="onEdit()"
+            >
               Edit
             </button>
           </div>
@@ -26,16 +32,17 @@
             <div class="row">
               <div class="col-sm-3"><p class="mb-0">Full Name</p></div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">Johnatan Smith</p>
+                <p class="text-muted mb-0">{{ profiles.userName }}</p>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3"><p class="mb-0">Email</p></div>
               <div class="col-sm-9">
-                <mat-form-field class="example-full-width">
+                <p class="text-muted mb-0">{{ profiles.email }}</p>
+                <!-- <mat-form-field class="example-full-width">
                   <input formControlName="emails" id="emails" matInput />
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
             </div>
             <hr />
@@ -45,9 +52,10 @@
                 <mat-form-field class="example-full-width">
                   <input
                     formControlName="phone"
+                    [attr.disabled]="is_edit == 'false' ? true : null"
                     id="phone"
                     matInput
-                    placeholder="Phone"
+                    placeholder="{{ profiles.phone }}"
                     value="9568957684"
                   />
                 </mat-form-field>
@@ -60,10 +68,10 @@
                 <mat-form-field class="example-full-width">
                   <input
                     formControlName="mobile"
+                    [attr.disabled]="is_edit == 'false' ? true : null"
                     id="mobile"
                     matInput
-                    placeholder="Mobile"
-                    value="8945781259"
+                    placeholder="{{ profiles.mobile }}"
                   />
                 </mat-form-field>
               </div>
@@ -75,19 +83,34 @@
                 <mat-form-field class="example-full-width">
                   <input
                     formControlName="address"
+                    [attr.disabled]="is_edit == 'false' ? true : null"
                     id="address"
                     matInput
-                    placeholder="Address"
-                    value="kanpur, up, India"
+                    placeholder="{{ profiles.address }}"
                   />
                 </mat-form-field>
               </div>
             </div>
 
             <div class="d-flex justify-content-center mb-2 mt-4">
-              <button type="submit" class="btn btn-outline-primary ms-1">
+              <button
+                type="submit"
+                class="btn btn-outline-primary ms-1"
+                [attr.disabled]="is_edit == 'false' ? true : null"
+              >
                 Save
               </button>
+              <span
+                [ngClass]="status == 1 ? 'text-success' : 'text-danger'"
+                style="
+                  text-align: center;
+                  margin: bottom 20px;
+                  font-size: 15px;
+                  font-weight: bold;
+                "
+              >
+                {{ message }}</span
+              >
             </div>
           </div>
         </div>

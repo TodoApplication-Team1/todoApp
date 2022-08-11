@@ -74,8 +74,6 @@ export class LoginComponent implements OnInit {
   }
 
   public addUser(f: any) {
-    this.status = 1;
-    this.message = 'Sign Up successful. Login using below link';
     this.User = {
       email: f.emails,
       userName: f.fullname,
@@ -83,9 +81,19 @@ export class LoginComponent implements OnInit {
     };
 
     console.log(this.User);
-    this.userLoginService.addUserLoginDetails(this.User).subscribe((data) => {
-      console.log('POST SUCCESS');
-      console.log(data);
-    });
+    this.userLoginService.addUserLoginDetails(this.User).subscribe(
+      (data) => {
+        this.status = 1;
+        this.message = 'Sign Up successful. Login using below link';
+        console.log('POST SUCCESS');
+        // if(data == ("User Already Exist")){
+
+        // }
+        console.log(data);
+      },
+      (err) => {
+        this.message = 'User Already Exist. Try another user';
+      }
+    );
   }
 }

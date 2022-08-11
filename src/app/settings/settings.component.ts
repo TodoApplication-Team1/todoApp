@@ -14,6 +14,8 @@ export class SettingsComponent implements OnInit {
   categoryForm!: FormGroup;
   categoryModel: any = Category;
   arr: any = [];
+  msg: any;
+  status = 0;
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -49,12 +51,18 @@ export class SettingsComponent implements OnInit {
     this.categoryModel = {
       categoryName: this.categoryForm.controls['category'].value,
     };
-    this.userLoginService
-      .addCategoryDetails(this.categoryModel)
-      .subscribe((data) => {
+    this.userLoginService.addCategoryDetails(this.categoryModel).subscribe(
+      (data) => {
+        this.status = 1;
+        this.msg = 'Category Added';
         this.arr = data;
         console.log(data);
-      });
+      },
+      (err) => {
+        this.status = 0;
+        this.msg = 'Category Already Exist';
+      }
+    );
   }
   onClick(ctgry: any) {
     console.log(ctgry);

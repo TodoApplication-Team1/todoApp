@@ -5,11 +5,12 @@ import { Observable,firstValueFrom } from 'rxjs';
 import { first, map, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodolistService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+  
 
   url1:string="http://localhost:8092/todo/login/getTodayList"
    getTodayList():Observable<Task[]>{
@@ -22,14 +23,10 @@ export class TodolistService {
       return this.http.get<String[]>(`${this.url2}`)
    }
 
-  url3:string="http://localhost:8092/todo/login/getCalendarList" 
-  getCalenderList():Observable<Task[]>{
-    return this.http.get<Task[]>(`${this.url3}`)
-  }
-
-  getEvents():Observable<Task[]>{
-    return this.http.get<Task[]>(`${this.url3}`)
-  }
+   url3:string="http://localhost:8092/todo/login/getCalendarList" 
+   getCalenderList():Observable<Task[]>{
+     return this.http.get<Task[]>(`${this.url3}`)
+   }
 
   
 }
