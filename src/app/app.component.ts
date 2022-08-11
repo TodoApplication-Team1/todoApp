@@ -20,7 +20,7 @@ export class AppComponent {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
-  // title = 'todo';
+   title = 'todo';
   // isSideNavCollapsed=false;
   // screenWidth=0;
   // onToggleSideNav(data:SideNavToggle):void{
