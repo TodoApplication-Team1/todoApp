@@ -28,8 +28,10 @@ import {
   FacebookLoginProvider,
   SocialLoginModule,
   SocialAuthServiceConfig,
-} from 'angularx-social-login';
+} from 'angularx-social-login'
 import { SignInComponent } from './sign-in/sign-in.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'
 
 FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
 @NgModule({
@@ -60,6 +62,10 @@ FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin]);
     HttpClientModule,
     MatFormFieldModule,
     SocialLoginModule,
+    CalendarModule.forRoot({
+      provide:DateAdapter,
+      useFactory:adapterFactory,
+    })
   ],
   providers: [
     UserLoginService,
